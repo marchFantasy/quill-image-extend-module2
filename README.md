@@ -1,4 +1,4 @@
-# quill-image-extend-module 
+# quill-image-extend-module2
 vue-quill-editor的增强模块，
 
 功能：
@@ -10,6 +10,8 @@ vue-quill-editor的增强模块，
  - 支持与其他模块一起使用（例如调整图片大小）
 
 ## 更新情况
+ - version 1.2
+    - 自定义上传函数upload，回调后返回
  - version 1.1
    - 增加上传显示文字样式
    - 增加图片超过自定义大小的回调 sizeError
@@ -88,6 +90,9 @@ npm install quill-image-extend-module --save-dev
                              name: 'img',  // 图片参数名
                              size: 3,  // 可选参数 图片大小，单位为M，1M = 1024kb
                              action: updateUrl,  // 服务器地址, 如果action为空，则采用base64插入图片
+                             upload: () => { // 与action2选1即可
+                               // upload image...
+                             }
                              // response 为一个函数用来获取服务器返回的具体图片地址
                              // 例如服务器返回{code: 200; data:{ url: 'baidu.com'}}
                              // 则 return res.data.url

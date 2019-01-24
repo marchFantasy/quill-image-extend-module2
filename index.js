@@ -264,7 +264,16 @@ export function imgHandler() {
             }
             if (self.config.action) {
                 self.uploadImg()
-            } else {
+            } else if(self.config.upload){
+                self.config.upload(self.file).then(function(response) {
+                    self.imgURL = self.config.response(response)
+                    QuillWatch.active.uploadSuccess()
+                    self.insertImg()
+                    if (self.config.success) {
+                        self.config.success()
+                    }
+                })
+            }else {
                 self.toBase64()
             }
         })
