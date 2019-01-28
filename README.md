@@ -90,7 +90,7 @@ npm install quill-image-extend-module --save-dev
                              name: 'img',  // 图片参数名
                              size: 3,  // 可选参数 图片大小，单位为M，1M = 1024kb
                              action: updateUrl,  // 服务器地址, 如果action为空，则采用base64插入图片
-                             upload: () => { // 与action2选1即可
+                             upload: () => { // 与action2选1即可,上传图片函数，返回promise
                                // upload image...
                              }
                              // response 为一个函数用来获取服务器返回的具体图片地址
