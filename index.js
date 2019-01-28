@@ -165,19 +165,19 @@ export const QuillWatch = {
         }
       }
       // 开始上传数据
-      xhr.upload.onloadstart = self.onBeforeUpload
+      xhr.upload.onloadstart = self.onBeforeUpload.bind(self)
       // 上传过程
-      xhr.upload.onprogress = self.onProgress
+      xhr.upload.onprogress = self.onProgress.bind(self)
       // 当发生网络异常的时候会触发，如果上传数据的过程还未结束
-      xhr.upload.onerror = self.onError
+      xhr.upload.onerror = self.onError.bind(self)
       // 上传数据完成（成功或者失败）时会触发
-      xhr.upload.onloadend = self.onAfterLoad
+      xhr.upload.onloadend = self.onAfterLoad.bind(self)
       xhr.send(formData)
     }
     /**
      * 开始上传
      */
-    onBeforeUpload = (e) => {
+    onBeforeUpload (e) {
       QuillWatch.active.uploading()
       // let length = (self.quill.getSelection() || {}).index || self.quill.getLength()
       // self.quill.insertText(length, '[uploading...]', { 'color': 'red'}, true)
@@ -188,14 +188,14 @@ export const QuillWatch = {
     /**
      * 上传进度
      */
-    onProgress = (e) => {
+    onProgress (e) {
       let complete = (e.loaded / e.total * 100 | 0) + '%'
       QuillWatch.active.progress(complete)
     }
     /**
      * 上传错误
      */
-    onError = (e) => {
+    onError (e) {
       QuillWatch.active.uploadError()
       if (this.config.error) {
         this.config.error()
@@ -204,7 +204,7 @@ export const QuillWatch = {
     /**
      * 上传之后
      */
-    onAfterLoad = () => {
+    onAfterLoad () {
       if (this.config.end) {
         this.config.end()
       }
@@ -213,7 +213,7 @@ export const QuillWatch = {
      * 上传成功
      * 在调用函数之前，确保imgUrl已经赋值成功
      */
-    onSuccess = () => {
+    onSuccess () {
       QuillWatch.active.uploadSuccess()
       this.insertImg()
       if (this.config.success) {
